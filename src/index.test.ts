@@ -47,7 +47,7 @@ describe('unit', () => {
     [221, 'two hundred and twenty-one'],
     [300, 'three hundred'],
     [321, 'three hundred and twenty-one'],
-    // [900, 'nine hundred'],
+    [900, 'nine hundred'],
     // [1000, 'one thousand'],
     // [1001, 'one thousand and one'], // confirm
     // [1021, 'one thousand and twenty-one'], // confirm
