@@ -20,10 +20,8 @@ const mapNumberToWords: Record<number, string> = {
   18: 'eighteen',
   19: 'nineteen',
   20: 'twenty',
-  // 21: 'twenty-one',
-  // 30: 'thirty',
-  // 31: 'thirty-one',
-  // 40: 'forty',
+  30: 'thirty',
+  40: 'forty',
   // 50: 'fifty',
   // 60: 'sixty',
   // 70: 'seventy',
@@ -32,8 +30,33 @@ const mapNumberToWords: Record<number, string> = {
   // 100: 'one hundred',
   // 1000: 'one thousand',
 }; // as const
+// TODO type able to return undefined;
 
 export const numberToWords = (number: number): string => {
-  const words = mapNumberToWords[number];
-  return words;
+  if (mapNumberToWords[number]) {
+    return mapNumberToWords[number];
+  }
+
+  if (number > 40) {
+    const tensAmount = 40;
+    const remainder = number - tensAmount;
+    const words = `${mapNumberToWords[tensAmount]}-${mapNumberToWords[remainder]}`;
+    return words;
+  }
+
+  if (number > 30) {
+    const tensAmount = 30;
+    const remainder = number - tensAmount;
+    const words = `${mapNumberToWords[tensAmount]}-${mapNumberToWords[remainder]}`;
+    return words;
+  }
+
+  if (number > 20) {
+    const tensAmount = 20;
+    const remainder = number - tensAmount;
+    const words = `${mapNumberToWords[tensAmount]}-${mapNumberToWords[remainder]}`;
+    return words;
+  }
+
+  throw new Error();
 };

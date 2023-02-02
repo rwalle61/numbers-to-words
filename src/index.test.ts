@@ -23,15 +23,21 @@ describe('unit', () => {
     [18, 'eighteen'],
     [19, 'nineteen'],
     [20, 'twenty'],
-    // [21, 'twenty-one'],
-    // [30, 'thirty'],
-    // [31, 'thirty-one'],
-    // [40, 'forty'],
+    [21, 'twenty-one'],
+    [30, 'thirty'],
+    [31, 'thirty-one'],
+    [40, 'forty'],
+    [41, 'forty-one'],
     // [50, 'fifty'],
+    // [50, 'fifty-one'],
     // [60, 'sixty'],
+    // [60, 'sixty-one'],
     // [70, 'seventy'],
+    // [70, 'seventy-one'],
     // [80, 'eighty'],
+    // [80, 'eighty-one'],
     // [90, 'ninety'],
+    // [90, 'ninety-one'],
     // [100, 'one hundred'],
     // [101, 'one hundred and one'],
     // [111, 'one hundred and eleven'],
@@ -77,6 +83,7 @@ describe('unit', () => {
   //   expect(output).toBe(expected);
   // });
 });
+
 // describe('acceptance', () => {
 //   it.each([
 //     [52, 'fifty-two'],
