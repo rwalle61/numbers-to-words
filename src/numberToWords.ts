@@ -22,11 +22,11 @@ const mapNumberToWords: Record<number, string> = {
   20: 'twenty',
   30: 'thirty',
   40: 'forty',
-  // 50: 'fifty',
-  // 60: 'sixty',
-  // 70: 'seventy',
-  // 80: 'eighty',
-  // 90: 'ninety',
+  50: 'fifty',
+  60: 'sixty',
+  70: 'seventy',
+  80: 'eighty',
+  90: 'ninety',
   // 100: 'one hundred',
   // 1000: 'one thousand',
 }; // as const
@@ -37,12 +37,12 @@ export const numberToWords = (number: number): string => {
     return mapNumberToWords[number];
   }
 
-  const tens = [40, 30, 20];
+  const tenAmounts = [90, 80, 70, 60, 50, 40, 30, 20];
 
-  for (const ten of tens) {
-    if (number > ten) {
-      const remainder = number - ten;
-      const words = `${mapNumberToWords[ten]}-${mapNumberToWords[remainder]}`;
+  for (const tenAmount of tenAmounts) {
+    if (number > tenAmount) {
+      const remainder = number - tenAmount;
+      const words = `${mapNumberToWords[tenAmount]}-${mapNumberToWords[remainder]}`;
       return words;
     }
   }
