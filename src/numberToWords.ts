@@ -27,23 +27,47 @@ const mapNumberToWords: Record<number, string> = {
   70: 'seventy',
   80: 'eighty',
   90: 'ninety',
-  // 100: 'one hundred',
+  100: 'one hundred',
+  200: 'two hundred',
+  300: 'three hundred',
   // 1000: 'one thousand',
 }; // as const
 // TODO type able to return undefined;
 
 export const numberToWords = (number: number): string => {
-  if (mapNumberToWords[number]) {
-    return mapNumberToWords[number];
+  let remainder = number;
+  let words = '';
+
+  if (mapNumberToWords[remainder]) {
+    return `${words}${mapNumberToWords[remainder]}`;
+  }
+
+  if (remainder > 300) {
+    remainder -= 300;
+    words += `three hundred and `;
+  }
+
+  if (remainder > 200) {
+    remainder -= 200;
+    words += `two hundred and `;
+  }
+
+  if (remainder > 100) {
+    remainder -= 100;
+    words += `one hundred and `;
+  }
+
+  if (mapNumberToWords[remainder]) {
+    return `${words}${mapNumberToWords[remainder]}`;
   }
 
   const tenAmounts = [90, 80, 70, 60, 50, 40, 30, 20];
 
   for (const tenAmount of tenAmounts) {
-    if (number > tenAmount) {
-      const remainder = number - tenAmount;
-      const words = `${mapNumberToWords[tenAmount]}-${mapNumberToWords[remainder]}`;
-      return words;
+    if (remainder > tenAmount) {
+      return `${words}${mapNumberToWords[tenAmount]}-${
+        mapNumberToWords[remainder - tenAmount]
+      }`;
     }
   }
 
