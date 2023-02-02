@@ -37,25 +37,14 @@ export const numberToWords = (number: number): string => {
     return mapNumberToWords[number];
   }
 
-  if (number > 40) {
-    const tensAmount = 40;
-    const remainder = number - tensAmount;
-    const words = `${mapNumberToWords[tensAmount]}-${mapNumberToWords[remainder]}`;
-    return words;
-  }
+  const tens = [40, 30, 20];
 
-  if (number > 30) {
-    const tensAmount = 30;
-    const remainder = number - tensAmount;
-    const words = `${mapNumberToWords[tensAmount]}-${mapNumberToWords[remainder]}`;
-    return words;
-  }
-
-  if (number > 20) {
-    const tensAmount = 20;
-    const remainder = number - tensAmount;
-    const words = `${mapNumberToWords[tensAmount]}-${mapNumberToWords[remainder]}`;
-    return words;
+  for (const ten of tens) {
+    if (number > ten) {
+      const remainder = number - ten;
+      const words = `${mapNumberToWords[ten]}-${mapNumberToWords[remainder]}`;
+      return words;
+    }
   }
 
   throw new Error();
