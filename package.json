@@ -1,13 +1,16 @@
 {
-  "name": "basic-ts",
+  "name": "numbers-to-words",
   "version": "0.1.0",
+  "description": "Convert numbers to words",
+  "bin": "bin/index.js",
   "scripts": {
     "start": "ts-node src",
     "format": "prettier --write .",
-    "type-check": "tsc --pretty --noEmit",
-    "lint": "yarn type-check && eslint --fix . --ext ts --ext js",
+    "type-check": "tsc --noEmit --project tsconfig.lint.json ",
+    "lint": "yarn type-check && eslint --fix . --ext ts",
     "tidy": "yarn format && yarn lint",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc && chmod u+x ./bin/index.js"
   },
   "author": "rwalle61",
   "license": "MIT",

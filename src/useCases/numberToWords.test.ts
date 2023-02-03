@@ -1,6 +1,6 @@
 import { numberToWords } from './numberToWords';
 
-describe('unit', () => {
+describe('numberToWords', () => {
   it.each([
     [0, 'zero'],
     [1, 'one'],

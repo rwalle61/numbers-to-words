@@ -1,2 +1,5 @@
-// eslint-disable-next-line no-console
-console.log('hi!');
+#!/usr/bin/env node
+
+import { cliController } from './controllers/cliController';
+
+cliController(process.argv);
