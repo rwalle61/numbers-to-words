@@ -1,4 +1,4 @@
-const mapNumberToWords: Record<number, string> = {
+const numberToWord: Record<number, string> = {
   1: 'one',
   2: 'two',
   3: 'three',
@@ -38,10 +38,9 @@ export const numberToWords = (number: number): string => {
   }
 
   if (remainder >= 1000) {
-    const thousandsDigit = Math.floor(remainder / 1000);
-    const thousandAmount = thousandsDigit * 1000;
-    remainder -= thousandAmount;
-    words += `${mapNumberToWords[thousandsDigit]} thousand`;
+    const thousandsDigits = Math.floor(remainder / 1000);
+    remainder -= thousandsDigits * 1000;
+    words += `${numberToWords(thousandsDigits)} thousand`;
   }
 
   if (remainder >= 100) {
@@ -50,10 +49,10 @@ export const numberToWords = (number: number): string => {
     }
     const hundredsDigit = Math.floor(remainder / 100);
     remainder -= hundredsDigit * 100;
-    words += `${mapNumberToWords[hundredsDigit]} hundred`;
+    words += `${numberToWord[hundredsDigit]} hundred`;
   }
 
-  if (words && remainder > 0) {
+  if (words && remainder !== 0) {
     words += ` and `;
   }
 
@@ -61,7 +60,7 @@ export const numberToWords = (number: number): string => {
     const tensDigit = Math.floor(remainder / 10);
     const tensAmount = tensDigit * 10;
     remainder -= tensAmount;
-    words += mapNumberToWords[tensAmount];
+    words += numberToWord[tensAmount];
 
     if (remainder !== 0) {
       words += '-';
@@ -69,7 +68,7 @@ export const numberToWords = (number: number): string => {
   }
 
   if (remainder !== 0) {
-    words += mapNumberToWords[remainder];
+    words += numberToWord[remainder];
   }
 
   return words;

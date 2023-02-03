@@ -60,9 +60,9 @@ describe('unit', () => {
     [2101, 'two thousand, one hundred and one'],
     [3000, 'three thousand'],
     [11_000, 'eleven thousand'],
-    // [21_000, 'twenty-one thousand'],
-    // [99_999, 'ninety-nine thousand, nine hundred and ninety-nine'], // boundary
-    // [100_000, 'one hundred thousand'],
+    [21_000, 'twenty-one thousand'],
+    [99_999, 'ninety-nine thousand, nine hundred and ninety-nine'], // boundary
+    [100_000, 'one hundred thousand'],
   ])('%d => %s', (input, expected) => {
     const output = numberToWords(input);
 
@@ -86,17 +86,17 @@ describe('unit', () => {
   // });
 });
 
-// describe('acceptance', () => {
-//   it.each([
-//     [52, 'fifty-two'],
-//     [1000, 'one thousand'],
-//     [101, 'one hundred and one'],
-//     [352, 'three hundred and fify-two'],
-//     [12300, 'twelve thousand, three hundred'],
-//     [12345, 'twelve thousand, three hundred and forty-five'],
-//   ])('name', (input, expected) => {
-//     const output = numberToWords(input);
+describe('acceptance', () => {
+  it.each([
+    [52, 'fifty-two'],
+    [1000, 'one thousand'],
+    [101, 'one hundred and one'],
+    [352, 'three hundred and fifty-two'],
+    [12300, 'twelve thousand, three hundred'],
+    [12345, 'twelve thousand, three hundred and forty-five'],
+  ])('%d => %s', (input, expected) => {
+    const output = numberToWords(input);
 
-//     expect(output).toBe(expected);
-//   });
-// });
+    expect(output).toBe(expected);
+  });
+});
