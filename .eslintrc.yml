@@ -28,7 +28,7 @@ extends:
   - prettier # must go last, to turn off some previous rules
 
 rules:
-  no-console: warn
+  no-console: off
   no-restricted-syntax: off
   prefer-arrow-callback: error
   prefer-arrow/prefer-arrow-functions: error
