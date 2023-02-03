@@ -55,11 +55,11 @@ describe('unit', () => {
     [1101, 'one thousand, one hundred and one'],
     [1121, 'one thousand, one hundred and twenty-one'],
     [1201, 'one thousand, two hundred and one'],
-    // [2000, 'two thousand'],
-    // [2001, 'two thousand and one'], // confirm
-    // [2101, 'two thousand, one hundred and one'],
-    // [3000, 'three thousand'],
-    // [11_000, 'eleven thousand'],
+    [2000, 'two thousand'],
+    [2001, 'two thousand and one'], // confirm
+    [2101, 'two thousand, one hundred and one'],
+    [3000, 'three thousand'],
+    [11_000, 'eleven thousand'],
     // [21_000, 'twenty-one thousand'],
     // [99_999, 'ninety-nine thousand, nine hundred and ninety-nine'], // boundary
     // [100_000, 'one hundred thousand'],
