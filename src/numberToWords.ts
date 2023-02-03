@@ -1,4 +1,4 @@
-const numberToWord: Record<number, string> = {
+const mapNumberToWord = {
   1: 'one',
   2: 'two',
   3: 'three',
@@ -27,7 +27,13 @@ const numberToWord: Record<number, string> = {
   80: 'eighty',
   90: 'ninety',
 };
-// TODO make type able to return undefined
+
+const numberToWord = (number: number): string => {
+  if (!(number in mapNumberToWord)) {
+    throw new Error(`Unexpected number: ${number}`);
+  }
+  return mapNumberToWord[number as keyof typeof numberToWord];
+};
 
 export const numberToWords = (number: number): string => {
   let remainder = number;
@@ -49,7 +55,7 @@ export const numberToWords = (number: number): string => {
     }
     const hundredsDigit = Math.floor(remainder / 100);
     remainder -= hundredsDigit * 100;
-    words += `${numberToWord[hundredsDigit]} hundred`;
+    words += `${numberToWord(hundredsDigit)} hundred`;
   }
 
   if (words && remainder !== 0) {
@@ -60,7 +66,7 @@ export const numberToWords = (number: number): string => {
     const tensDigit = Math.floor(remainder / 10);
     const tensAmount = tensDigit * 10;
     remainder -= tensAmount;
-    words += numberToWord[tensAmount];
+    words += numberToWord(tensAmount);
 
     if (remainder !== 0) {
       words += '-';
@@ -68,7 +74,7 @@ export const numberToWords = (number: number): string => {
   }
 
   if (remainder !== 0) {
-    words += numberToWord[remainder];
+    words += numberToWord(remainder);
   }
 
   return words;
