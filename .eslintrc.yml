@@ -28,7 +28,6 @@ extends:
   - prettier # must go last, to turn off some previous rules
 
 rules:
-  no-plusplus: off
   no-console: warn
   no-restricted-syntax: off
   prefer-arrow-callback: error
@@ -37,11 +36,9 @@ rules:
     - error
     - devDependencies:
         - '**/*test*'
-  import/extensions: off
   import/prefer-default-export: off
   no-unused-vars: off
   '@typescript-eslint/no-unused-vars': error
   '@typescript-eslint/explicit-function-return-type': error
   jest/valid-title: off
-  jest/no-commented-out-tests: off
   jest/no-focused-tests: warn

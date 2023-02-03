@@ -35,6 +35,10 @@ const numberToWord = (number: number): string => {
   return mapNumberToWord[number as keyof typeof numberToWord];
 };
 
+const THOUSAND = 1000;
+const HUNDRED = 100;
+const TEN = 10;
+
 export const numberToWords = (number: number): string => {
   let remainder = number;
   let words = '';
@@ -43,19 +47,19 @@ export const numberToWords = (number: number): string => {
     return 'zero';
   }
 
-  if (remainder >= 1000) {
-    const thousandsDigits = Math.floor(remainder / 1000);
-    remainder -= thousandsDigits * 1000;
+  if (remainder >= THOUSAND) {
+    const thousandsDigits = Math.floor(remainder / THOUSAND);
     words += `${numberToWords(thousandsDigits)} thousand`;
+    remainder %= THOUSAND;
   }
 
-  if (remainder >= 100) {
+  if (remainder >= HUNDRED) {
     if (words) {
       words += `, `;
     }
-    const hundredsDigit = Math.floor(remainder / 100);
-    remainder -= hundredsDigit * 100;
+    const hundredsDigit = Math.floor(remainder / HUNDRED);
     words += `${numberToWord(hundredsDigit)} hundred`;
+    remainder %= HUNDRED;
   }
 
   if (words && remainder !== 0) {
@@ -63,10 +67,10 @@ export const numberToWords = (number: number): string => {
   }
 
   if (remainder > 20) {
-    const tensDigit = Math.floor(remainder / 10);
-    const tensAmount = tensDigit * 10;
-    remainder -= tensAmount;
+    const tensDigit = Math.floor(remainder / TEN);
+    const tensAmount = tensDigit * TEN;
     words += numberToWord(tensAmount);
+    remainder %= TEN;
 
     if (remainder !== 0) {
       words += '-';
