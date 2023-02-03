@@ -3,13 +3,8 @@ import { cliController } from './cliController';
 
 describe('cliController', () => {
   it('outputs correct word', () => {
-    const args: NodeJS.Process['argv'] = [
-      '/Users/richard/numbers-to-words/node_modules/.bin/ts-node',
-      '/Users/richard/numbers-to-words/src',
-      '1',
-    ];
-
     const output = jest.spyOn(outputter, 'output').mockImplementation();
+    const args = ['/bin/node', '/bin/index.js', '1'];
 
     cliController(args);
 

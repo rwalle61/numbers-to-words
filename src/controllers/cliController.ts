@@ -1,9 +1,10 @@
 import { output } from '../adapters/cliOutputter';
+import { parse } from '../adapters/cliParser';
 import { numberToWords } from '../useCases/numberToWords';
 
-const parse = (args: string[]): number => parseInt(args[2], 10);
+export type CLIArgs = NodeJS.Process['argv'];
 
-export const cliController = (args: string[]): void => {
+export const cliController = (args: CLIArgs): void => {
   const number = parse(args);
 
   const words = numberToWords(number);

@@ -61,29 +61,13 @@ describe('numberToWords', () => {
     [3000, 'three thousand'],
     [11_000, 'eleven thousand'],
     [21_000, 'twenty-one thousand'],
-    [99_999, 'ninety-nine thousand, nine hundred and ninety-nine'], // boundary
+    [99_999, 'ninety-nine thousand, nine hundred and ninety-nine'],
     [100_000, 'one hundred thousand'],
   ])('%d => %s', (input, expected) => {
     const output = numberToWords(input);
 
     expect(output).toBe(expected);
   });
-
-  // reject
-  // it.each([
-  //   [-1],
-  //   [Infinity],
-  //   [100_001],
-  //   [NaN],
-  //   [undefined],
-  //   [null],
-  //   [() => throw)],
-  //   [eval],
-  // ])('name', (input) => {
-  //   const output = numberToWords(input);
-
-  //   expect(output).toBe(expected);
-  // });
 });
 
 describe('acceptance', () => {

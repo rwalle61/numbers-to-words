@@ -39,7 +39,6 @@ rules:
         - '**/*test*'
   import/extensions: off
   import/prefer-default-export: off
-  import/no-cycle: off
   no-unused-vars: off
   '@typescript-eslint/no-unused-vars': error
   '@typescript-eslint/explicit-function-return-type': error
