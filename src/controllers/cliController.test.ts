@@ -5,7 +5,7 @@ import { cliController } from './cliController';
 describe('cliController', () => {
   it('outputs correct word to stdout', () => {
     const toStdout = jest.spyOn(outputter, 'toStdout').mockImplementation();
-    const args = ['/bin/node', '/bin/index.js', '1'];
+    const args = ['/bin/node', '/bin/command', '1'];
 
     cliController(args);
 
@@ -18,7 +18,7 @@ describe('cliController', () => {
       throw error;
     });
     const toStderr = jest.spyOn(outputter, 'toStderr').mockImplementation();
-    const args = ['/bin/node', '/bin/index.js', '1'];
+    const args = ['/bin/node', '/bin/command', '1'];
 
     cliController(args);
 

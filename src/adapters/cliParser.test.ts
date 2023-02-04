@@ -4,7 +4,7 @@ import { parse } from './cliParser';
 
 const makeArgs = (commandArgs: string[]): CLIArgs => [
   '/bin/node',
-  '/bin/index.js',
+  '/bin/command',
   ...commandArgs,
 ];
 
