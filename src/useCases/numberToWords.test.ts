@@ -49,14 +49,14 @@ describe('numberToWords', () => {
     [321, 'three hundred and twenty-one'],
     [900, 'nine hundred'],
     [1000, 'one thousand'],
-    [1001, 'one thousand and one'], // confirm
-    [1021, 'one thousand and twenty-one'], // confirm
+    [1001, 'one thousand and one'],
+    [1021, 'one thousand and twenty-one'],
     [1100, 'one thousand, one hundred'],
     [1101, 'one thousand, one hundred and one'],
     [1121, 'one thousand, one hundred and twenty-one'],
     [1201, 'one thousand, two hundred and one'],
     [2000, 'two thousand'],
-    [2001, 'two thousand and one'], // confirm
+    [2001, 'two thousand and one'],
     [2101, 'two thousand, one hundred and one'],
     [3000, 'three thousand'],
     [11_000, 'eleven thousand'],
