@@ -57,7 +57,7 @@ Error: Arg must be between 0-100000
 
 - structure
 
-  - flow: `index.ts` entrypoint -> controller -> parse input -> invoke use case -> output
+  - flow: `index.ts` -> controller -> parse input -> invoke use case -> output
   - Separated business logic (use case) from CLI-specific details (controller and adapters) so they can change independently (e.g. can run this on the cloud instead of CLI without changing core logic)
   - minimal abstraction (besides separating concerns) so easy to extend
   - no external libraries (e.g. [`commander`](https://www.npmjs.com/package/commander)) because simpler

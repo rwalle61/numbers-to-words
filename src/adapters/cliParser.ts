@@ -3,14 +3,16 @@ import { MAX_NUMBER, MIN_NUMBER } from '../domain/range';
 
 const isInteger = (string: string): boolean => /^-?\d+$/.test(string);
 
+const REQUIRED_ARGS = 3;
+
 export const parse = (args: CLIArgs): number => {
-  if (args.length < 3) {
+  if (args.length < REQUIRED_ARGS) {
     throw new Error('Too few args');
   }
-  if (args.length > 3) {
+  if (args.length > REQUIRED_ARGS) {
     throw new Error('Too many args');
   }
-  const commandArg = args[2];
+  const commandArg = args[REQUIRED_ARGS - 1];
 
   if (!isInteger(commandArg)) {
     throw new Error('Arg must be integer');

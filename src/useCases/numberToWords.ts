@@ -1,4 +1,4 @@
-const mapNumberToWord = {
+const onesToWord: Record<number, string> = {
   1: 'one',
   2: 'two',
   3: 'three',
@@ -8,6 +8,10 @@ const mapNumberToWord = {
   7: 'seven',
   8: 'eight',
   9: 'nine',
+};
+
+const underTwentyToWord: Record<number, string> = {
+  ...onesToWord,
   10: 'ten',
   11: 'eleven',
   12: 'twelve',
@@ -18,6 +22,9 @@ const mapNumberToWord = {
   17: 'seventeen',
   18: 'eighteen',
   19: 'nineteen',
+};
+
+const tensToWord: Record<number, string> = {
   20: 'twenty',
   30: 'thirty',
   40: 'forty',
@@ -28,57 +35,48 @@ const mapNumberToWord = {
   90: 'ninety',
 };
 
-const numberToWord = (number: number): string => {
-  if (!(number in mapNumberToWord)) {
-    throw new Error(`Unexpected number: ${number}`);
-  }
-  return mapNumberToWord[number as keyof typeof numberToWord];
-};
-
 const THOUSAND = 1000;
 const HUNDRED = 100;
 const TEN = 10;
 
 export const numberToWords = (number: number): string => {
-  let remainder = number;
-  let words = '';
-
-  if (remainder === 0) {
+  if (number === 0) {
     return 'zero';
   }
 
-  if (remainder >= THOUSAND) {
-    const thousandsDigits = Math.floor(remainder / THOUSAND);
+  let words = '';
+
+  const thousandsDigits = Math.floor(number / THOUSAND);
+  const hundredsDigit = Math.floor((number % THOUSAND) / HUNDRED);
+  const onesDigit = number % TEN;
+  const underHundredAmount = number % HUNDRED;
+
+  if (thousandsDigits) {
     words += `${numberToWords(thousandsDigits)} thousand`;
-    remainder %= THOUSAND;
   }
 
-  if (remainder >= HUNDRED) {
-    if (words) {
-      words += `, `;
+  if (thousandsDigits && hundredsDigit) {
+    words += ', ';
+  }
+
+  if (hundredsDigit) {
+    words += `${onesToWord[hundredsDigit]} hundred`;
+  }
+
+  if ((thousandsDigits || hundredsDigit) && underHundredAmount) {
+    words += ' and ';
+  }
+
+  if (underHundredAmount) {
+    if (underHundredAmount < 20) {
+      words += underTwentyToWord[underHundredAmount];
+    } else if (onesDigit) {
+      words += `${tensToWord[underHundredAmount - onesDigit]}-${
+        onesToWord[onesDigit]
+      }`;
+    } else {
+      words += tensToWord[underHundredAmount];
     }
-    const hundredsDigit = Math.floor(remainder / HUNDRED);
-    words += `${numberToWord(hundredsDigit)} hundred`;
-    remainder %= HUNDRED;
-  }
-
-  if (words && remainder !== 0) {
-    words += ` and `;
-  }
-
-  if (remainder > 20) {
-    const tensDigit = Math.floor(remainder / TEN);
-    const tensAmount = tensDigit * TEN;
-    words += numberToWord(tensAmount);
-    remainder %= TEN;
-
-    if (remainder !== 0) {
-      words += '-';
-    }
-  }
-
-  if (remainder !== 0) {
-    words += numberToWord(remainder);
   }
 
   return words;
