@@ -61,7 +61,7 @@ Error: Arg must be between 0-100000
   - Separated business logic (use case) from CLI-specific details (controller and adapters) so they can change independently (e.g. can run this on the cloud instead of CLI without changing core logic)
   - minimal abstraction (besides separating concerns) so easy to extend
   - no external libraries (e.g. [`commander`](https://www.npmjs.com/package/commander)) because simpler
-  - I used `node` and `TypeScript` because it works well for this problem, I'm very familiar with it, and TypesScript provides good compile-time type-safety
+  - I used `node` and `TypeScript` because it works well for this problem, I'm familiar with them, and TypeScript provides good compile-time type-safety
 
 - testing
   - developed using TDD (see commits)
