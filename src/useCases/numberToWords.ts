@@ -1,4 +1,4 @@
-const onesToWord: Record<number, string> = {
+const onesToWord = {
   1: 'one',
   2: 'two',
   3: 'three',
@@ -10,9 +10,9 @@ const onesToWord: Record<number, string> = {
   9: 'nine',
 };
 
-const underTwentyToWord: Record<number, string> = {
-  ...onesToWord,
-  10: 'ten',
+type OnesDigit = keyof typeof onesToWord;
+
+const teensToWord = {
   11: 'eleven',
   12: 'twelve',
   13: 'thirteen',
@@ -24,7 +24,8 @@ const underTwentyToWord: Record<number, string> = {
   19: 'nineteen',
 };
 
-const tensToWord: Record<number, string> = {
+const tensToWord = {
+  10: 'ten',
   20: 'twenty',
   30: 'thirty',
   40: 'forty',
@@ -35,49 +36,47 @@ const tensToWord: Record<number, string> = {
   90: 'ninety',
 };
 
-const THOUSAND = 1000;
-const HUNDRED = 100;
-const TEN = 10;
+type TensDigit = keyof typeof tensToWord;
+
+const numbersToWords = {
+  0: 'zero',
+  ...onesToWord,
+  ...teensToWord,
+  ...tensToWord,
+};
+
+const illionsToWords = [
+  [10 ** 15, 'quadrillion'],
+  [10 ** 12, 'trillion'],
+  [10 ** 9, 'billion'],
+  [10 ** 6, 'million'],
+  [10 ** 3, 'thousand'],
+  [10 ** 2, 'hundred'],
+] as const;
 
 export const numberToWords = (number: number): string => {
-  if (number === 0) {
-    return 'zero';
-  }
+  for (const [illionNumber, illionWord] of illionsToWords) {
+    const illionDigits = Math.floor(number / illionNumber);
 
-  let words = '';
+    if (illionDigits) {
+      let words = `${numberToWords(illionDigits)} ${illionWord}`;
 
-  const thousandsDigits = Math.floor(number / THOUSAND);
-  const hundredsDigit = Math.floor((number % THOUSAND) / HUNDRED);
-  const onesDigit = number % TEN;
-  const underHundredAmount = number % HUNDRED;
+      const remainder = number % illionNumber;
 
-  if (thousandsDigits) {
-    words += `${numberToWords(thousandsDigits)} thousand`;
-  }
+      if (remainder) {
+        const delimiter = remainder < 100 ? ' and ' : ', ';
+        words += `${delimiter}${numberToWords(remainder)}`;
+      }
 
-  if (thousandsDigits && hundredsDigit) {
-    words += ', ';
-  }
-
-  if (hundredsDigit) {
-    words += `${onesToWord[hundredsDigit]} hundred`;
-  }
-
-  if ((thousandsDigits || hundredsDigit) && underHundredAmount) {
-    words += ' and ';
-  }
-
-  if (underHundredAmount) {
-    if (underHundredAmount < 20) {
-      words += underTwentyToWord[underHundredAmount];
-    } else if (onesDigit) {
-      words += `${tensToWord[underHundredAmount - onesDigit]}-${
-        onesToWord[onesDigit]
-      }`;
-    } else {
-      words += tensToWord[underHundredAmount];
+      return words;
     }
   }
 
-  return words;
+  if (number in numbersToWords) {
+    return numbersToWords[number as keyof typeof numbersToWords];
+  }
+
+  const onesDigit = (number % 10) as OnesDigit;
+  const tensDigit = (number - onesDigit) as TensDigit;
+  return `${tensToWord[tensDigit]}-${onesToWord[onesDigit]}`;
 };

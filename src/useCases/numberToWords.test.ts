@@ -63,6 +63,27 @@ describe('numberToWords', () => {
     [21_000, 'twenty-one thousand'],
     [99_999, 'ninety-nine thousand, nine hundred and ninety-nine'],
     [100_000, 'one hundred thousand'],
+    [999_900, 'nine hundred and ninety-nine thousand, nine hundred'],
+    [1_000_000, 'one million'],
+    [1_000_001, 'one million and one'],
+    [
+      999_900_900,
+      'nine hundred and ninety-nine million, nine hundred thousand, nine hundred',
+    ],
+    [1_000_000_000, 'one billion'],
+    [1_000_000_001, 'one billion and one'],
+    [
+      999_900_900_900,
+      'nine hundred and ninety-nine billion, nine hundred million, nine hundred thousand, nine hundred',
+    ],
+    [
+      999_900_900_900_900,
+      'nine hundred and ninety-nine trillion, nine hundred billion, nine hundred million, nine hundred thousand, nine hundred',
+    ],
+    [
+      8_900_900_900_900_900, // just under max safe integer of nine quadrillion `9007199254740991`
+      'eight quadrillion, nine hundred trillion, nine hundred billion, nine hundred million, nine hundred thousand, nine hundred',
+    ],
   ])('%d => %s', (input, expected) => {
     const output = numberToWords(input);
 
@@ -78,6 +99,7 @@ describe('acceptance', () => {
     [352, 'three hundred and fifty-two'],
     [12300, 'twelve thousand, three hundred'],
     [12345, 'twelve thousand, three hundred and forty-five'],
+    [1_000_000_000, 'one billion'],
   ])('%d => %s', (input, expected) => {
     const output = numberToWords(input);
 
