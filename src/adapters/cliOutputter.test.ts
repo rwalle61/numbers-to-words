@@ -1,4 +1,3 @@
-import { inspect } from 'util';
 import { toStderr, toStdout } from './cliOutputter';
 
 describe('cliOutputter', () => {
@@ -14,17 +13,19 @@ describe('cliOutputter', () => {
 
   describe('toStderr', () => {
     it('outputs to stderr when an Error is thrown', () => {
-      const error = new Error();
+      jest.spyOn(console, 'error').mockImplementation();
 
-      expect(() => toStderr(error)).toThrow(error);
+      toStderr(new Error('err'));
+
+      expect(console.error).toHaveBeenCalledWith('err');
     });
 
     it('outputs to stderr when a non-Error is thrown', () => {
-      const unknownError = {};
+      jest.spyOn(console, 'error').mockImplementation();
 
-      expect(() => toStderr(unknownError)).toThrow(
-        new Error(inspect(unknownError)),
-      );
+      toStderr({});
+
+      expect(console.error).toHaveBeenCalledWith({});
     });
   });
 });
